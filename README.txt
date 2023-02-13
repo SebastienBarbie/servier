@@ -5,7 +5,7 @@ Voici mon rendu de projet pour le test technique proposé par Servier.
 Il est impératif pour le bon fonctionnement du programme de lancer la ligne de commande suivante depuis
 la racine du projet : 
 
-bash script.sh
+tar -xzf test_technique.tar.gz --exclude=".*"
 
 /!\
 

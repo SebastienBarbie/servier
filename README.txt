@@ -1,5 +1,16 @@
 Voici mon rendu de projet pour le test technique proposé par Servier.
 
+/!\ IMPORTANT /!\
+
+Il est impératif pour le bon fonctionnement du programme de lancer la ligne de commande suivante depuis
+la racine du projet : 
+
+bash script.sh
+
+/!\
+
+
+
 Vous trouverez dans ce repo la liste de choses suivantes :
 
     - report.ipynb : Un notebook d'analyse contenant toutes mes recherches concernant la data augmentation,

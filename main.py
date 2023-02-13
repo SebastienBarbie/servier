@@ -15,7 +15,7 @@ def main():
         else:
             value = 0
 
-        path = 'd:/servier/Test_Technique_Image/Neuroflux_disorder/'
+        path = './Test_Technique_Image/Neuroflux_disorder/'
         classes = os.listdir(path)
         model = ModelFromScratch()
 

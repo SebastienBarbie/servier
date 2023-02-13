@@ -1,0 +1,1 @@
+tar -xzf test_technique.tar.gz --exclude=".*"

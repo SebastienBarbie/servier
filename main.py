@@ -57,18 +57,6 @@ def main():
             predict = model.predict(img_batch)
             print(classes[predict.argmax()])
 
-
-
-
-    
-
-    # train.preprocess()
-
-    # model = ModelFromScratch()
-
-    # model.compile()
-    # fit = model.fit(train.get_datas(), val.get_datas(), 100)
-
 if __name__ == '__main__':
     main()
 

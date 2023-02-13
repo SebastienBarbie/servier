@@ -18,6 +18,9 @@ class Dataset:
                 subset=substet,
                 interpolation='bilinear',
         )
+        self.classes = classes
+        self.path = path
+        self.coeffs = {}
 
     def preprocess(self):
         flip = Sequential(
@@ -58,7 +61,23 @@ class Dataset:
 
         self.datas.concatenate(augmented_flip)
         self.datas.concatenate(augmented_rot)
-        # self.datas.concatenate(rot2)
+        self.datas.concatenate(augmented_rot2)
     
     def get_datas(self):
         return self.datas
+
+    def generate_coeffs(self):
+        counts = {}
+        total_files = 0
+        for c in self.classes:
+            length = len(os.listdir(os.path.join(self.path, c)))
+            counts[c] = length
+            total_files += length
+            
+        for k, v in counts.items():
+            counts[k] = 1 / v * 100
+
+        coeff = {}
+        for i in range(len(counts)):
+            coeff[i] = counts[self.classes[i]]
+        self.coeffs = coeff

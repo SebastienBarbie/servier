@@ -3,48 +3,52 @@ from dataset import Dataset
 import os
 import sys
 import tensorflow as tf
+import keras
 
 def main():
-    path = 'd:/servier/Test_Technique_Image/Neuroflux_disorder/'
-    classes = os.listdir(path)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
+
+    value = 0
+    while value < 1 or value > 3:
+        value = input("1 - Train the model\n2 - Evaluate the model\n3 - Predict the stage of the disease\n")
+        if value.isdigit():
+            value = int(value)
+        else:
+            value = 0
+
+    
+    if value == 1 :
+        epochs = input("How many epochs ?\n")
+        if epochs.isdigit():
+            epochs = int(epochs)
+        else:
+            epochs = 10
+
+        model = ModelFromScratch()
+        path = 'd:/servier/Test_Technique_Image/Neuroflux_disorder/'
+        classes = os.listdir(path)
+
+        train = Dataset(path, classes, "training", 0.2)
+        train.preprocess()
+        train.generate_coeffs()
+
+        print(train.coeffs)
+
+        val = Dataset(path, classes, "validation", 0.2)
+
+        model.fit(train.get_datas(), val.get_datas(), epochs, train.coeffs)
+    
 
 
-    train = Dataset(path, classes, "training", 0.2)
-    val = Dataset(path, classes, "validation", 0.2)
 
-    # train = tf.keras.utils.image_dataset_from_directory(
-    #     path,
-    #     labels='inferred',
-    #     label_mode='categorical',
-    #     class_names=classes,
-    #     batch_size=32,
-    #     image_size=(32, 32),
-    #     seed=123,
-    #     validation_split=0.2,
-    #     subset="training",
-    #     interpolation='bilinear',
-    # )
+    
 
-    # val = tf.keras.utils.image_dataset_from_directory(
-    #     path,
-    #     labels='inferred',
-    #     label_mode='categorical',
-    #     class_names=classes,
-    #     batch_size=32,
-    #     image_size=(32, 32),
-    #     seed=123,
-    #     validation_split=0.2,
-    #     subset="training",
-    #     interpolation='bilinear',
-    # )
-    train.preprocess()
+    # train.preprocess()
 
-    model = ModelFromScratch()
+    # model = ModelFromScratch()
 
-    model.compile()
-    fit = model.fit(train.get_datas(), val.get_datas(), 100)
+    # model.compile()
+    # fit = model.fit(train.get_datas(), val.get_datas(), 100)
 
 if __name__ == '__main__':
-    sys.exit(main())
+    main()
 
